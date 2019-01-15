@@ -12,7 +12,8 @@ import { ListEmployeesComponent } from './employees/list-employees.component';
 import { CreateEmployeeComponent } from './employees/create-employee.component';
 import { DisplayEmployeeComponent } from './employees/display-employee.component';
 import { CreateEmployeeCanDeactivateGuardService } from './employees/create-employee-can-deactivate-guard.service';
-import { EmployeeDetailsComponent } from './employees/employee-details.component'
+import { EmployeeDetailsComponent } from './employees/employee-details.component';
+import { EmployeeFilterPipe } from './employees/employee-filter.pipe'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EmployeeDetailsComponent } from './employees/employee-details.component
     SelectRequiredValidatorDirective,
     ConfirmEqualValidatorDirective,
     DisplayEmployeeComponent,
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    EmployeeFilterPipe
   ],
   imports: [
     BrowserModule,

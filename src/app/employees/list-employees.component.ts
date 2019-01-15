@@ -10,6 +10,7 @@ import { Router } from '@angular/router'
 })
 export class ListEmployeesComponent implements OnInit {
   employees: Employee[]
+  searchTerm: string;
 
   private arrayIndex = 1;
   constructor(private _employeeService: EmployeeService,
