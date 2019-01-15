@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { ListEmployeesComponent } from './employees/list-employees.component';
 import { CreateEmployeeComponent } from './employees/create-employee.component';
 import { DisplayEmployeeComponent } from './employees/display-employee.component';
+import { CreateEmployeeCanDeactivateGuardService } from './employees/create-employee-can-deactivate-guard.service';
+import { EmployeeDetailsComponent } from './employees/employee-details.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { DisplayEmployeeComponent } from './employees/display-employee.component
     CreateEmployeeComponent,
     SelectRequiredValidatorDirective,
     ConfirmEqualValidatorDirective,
-    DisplayEmployeeComponent
+    DisplayEmployeeComponent,
+    EmployeeDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,7 @@ import { DisplayEmployeeComponent } from './employees/display-employee.component
     FormsModule,
     BsDatepickerModule.forRoot()
   ],
-  providers: [EmployeeService],
+  providers: [EmployeeService, CreateEmployeeCanDeactivateGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
