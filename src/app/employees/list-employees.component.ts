@@ -40,7 +40,7 @@ export class ListEmployeesComponent implements OnInit {
 
   changeEmployeeName() {
     this.employees[0].name = 'Jordan';
-    this.filteredEmployees = this.filtereEmployees(this.searchTerm);
+    this.filteredEmployees = this.filtereEmployees(this.searchTerm); 
     // const newEmployeeArray: Employee[] = Object.assign([], this.employees);
     // newEmployeeArray[0].name = 'Jordan'
     // this.employees = newEmployeeArray
@@ -52,6 +52,11 @@ export class ListEmployeesComponent implements OnInit {
 
   onClick(employeeId: number) {
     // this._router.navigate(['destination', 'route_parameter'])
-    this._router.navigate(['/employees', employeeId])
+    this._router.navigate(['/employees', employeeId], {
+      queryParams: {
+        'searchTerm': this.searchTerm,
+        'testParam': 'testValue'
+      }
+    })
   }
 }
