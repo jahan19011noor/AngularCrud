@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http' 
+import { HttpClient, HttpErrorResponse } from '@angular/common/http' 
+import { throwError } from 'rxjs';
 import { Employee } from '../models/employee.model'
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators'
 // import 'rxjs/add/operators/delay'
 
 @Injectable({
@@ -54,7 +55,23 @@ export class EmployeeService {
   // }
 
   getEmployees(): Observable<Employee[]> {
-    return this._httpClient.get<Employee[]>('http://localhost:3000/employees');
+    return this._httpClient.get<Employee[]>('http://localhost:3000/employees1')
+                .pipe(
+                  catchError(this.handleError)
+                )
+  }
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    if(errorResponse.error instanceof ErrorEvent)
+    {
+      console.log('Client Side Error: ', errorResponse.error.message)
+    }
+    else {
+      console.log('Server Side Error: ', errorResponse);
+    }
+
+    return throwError(new Error('There is a problem with the service. We are notified & working on it. Please try again later.'))
+    
   }
 
   getEmployee(id: number): Employee {
