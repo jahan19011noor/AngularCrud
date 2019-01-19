@@ -12,7 +12,7 @@ export class ListEmployeesComponent implements OnInit {
   filteredEmployees: Employee[];
   // searchTerm: string;
   private _searchTerm: string;
-  
+
   get searchTerm(): string {
     return this._searchTerm
   }
@@ -22,24 +22,31 @@ export class ListEmployeesComponent implements OnInit {
     this.filteredEmployees = this.filtereEmployees(value);
   }
 
-  filtereEmployees(searchString: string){
+  filtereEmployees(searchString: string) {
     return this.employees.filter(
-      employee => 
+      employee =>
         employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
   }
 
   private arrayIndex = 1;
   constructor(private _router: Router,
-              private _route: ActivatedRoute) { 
-                this.employees = this._route.snapshot.data['employeeList']
-                if(this._route.snapshot.queryParamMap.has('searchTerm')) {
-                  this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm')
-                }
-                else {
-                  this.filteredEmployees = this.employees;
-                  // console.log('Else Block: ' + new Date().toTimeString())
-                }
-               }
+    private _route: ActivatedRoute) {
+    this.employees = this._route.snapshot.data['employeeList']
+    if (this._route.snapshot.queryParamMap.has('searchTerm')) {
+      this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm')
+    }
+    else {
+      this.filteredEmployees = this.employees;
+      // console.log('Else Block: ' + new Date().toTimeString())
+    }
+  }
+
+  onDeleteNotification(id: number) {
+    const i = this.filteredEmployees.findIndex(e => e.id === id)
+    if (i !== -1) {
+      this.filteredEmployees.splice(i, 1);
+    }
+  }
 
   ngOnInit() {
     // this._employeeService.getEmployees().subscribe((employeeList) => {
