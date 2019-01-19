@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http' 
 import { Employee } from '../models/employee.model'
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators'
@@ -46,10 +47,14 @@ export class EmployeeService {
       photoPath: 'assets/images/john.png'
     }
   ]
-  constructor() { }
+  constructor(private _httpClient: HttpClient) { }
+
+  // getEmployees(): Observable<Employee[]> {
+  //   return of(this.listEmployees).pipe(delay(2000));
+  // }
 
   getEmployees(): Observable<Employee[]> {
-    return of(this.listEmployees).pipe(delay(2000));
+    return this._httpClient.get<Employee[]>('http://localhost:3000/employees');
   }
 
   getEmployee(id: number): Employee {

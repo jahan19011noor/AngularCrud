@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SelectRequiredValidatorDirective } from './shared/select-required-validator.directive'
 import { ConfirmEqualValidatorDirective } from './shared/confirm-equal-validator.directive'
@@ -36,6 +37,7 @@ import { AccordionComponent } from './shared/accordion.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     BsDatepickerModule.forRoot()
   ],
   providers: [
