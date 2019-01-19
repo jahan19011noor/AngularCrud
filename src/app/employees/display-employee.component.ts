@@ -15,7 +15,9 @@ export class DisplayEmployeeComponent implements OnInit  {
   @Input() employee: Employee;
   @Input() searchTerm: string;
   @Output() notifyDelete: EventEmitter<number> = new EventEmitter<number>();
-  confirmDelete = false
+  confirmDelete = false;
+  // panelExpanded = true;
+  isHidden = false;
 
   // @Output() notify: EventEmitter<Employee> = new EventEmitter<Employee>();
 

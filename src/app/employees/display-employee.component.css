@@ -12,3 +12,7 @@
     width: 70px;
     margin-right: 10px;
 }
+
+.pointerCursor {
+    cursor: pointer;
+}
