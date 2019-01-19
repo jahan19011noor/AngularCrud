@@ -15,6 +15,7 @@ export class EmployeeService {
       gender: 'Male',
       contactPreference: 'Email',
       email: 'mark@pragimtech.com',
+      phoneNumber: 2345978640,
       dateOfBirth: new Date('10/25/1988'),
       department: '3',
       isActive: true,
@@ -25,7 +26,8 @@ export class EmployeeService {
       name: 'Mary',
       gender: 'Female',
       contactPreference: 'Phone',
-      email: '2345978640',
+      email: '',
+      phoneNumber: 2345978640,
       dateOfBirth: new Date('11/20/1979'),
       department: '2',
       isActive: true,
@@ -36,7 +38,8 @@ export class EmployeeService {
       name: 'John',
       gender: 'Male',
       contactPreference: 'Phone',
-      email: '5432978640',
+      email: '',
+      phoneNumber: 2345978640,
       dateOfBirth: new Date('3/25/1976'),
       department: '3',
       isActive: true,
@@ -54,6 +57,18 @@ export class EmployeeService {
   }
 
   save(employee: Employee) {
-    this.listEmployees.push(employee);
+    if(employee.id === null)
+    {
+      const maxId = this.listEmployees.reduce(function(e1, e2) {
+        return (e1.id > e2.id) ? e1 : e2;
+      }).id;
+      employee.id = maxId + 1
+      this.listEmployees.push(employee);
+    }
+    else {
+      const foundIndex = this.listEmployees.findIndex(e => e.id === employee.id)
+      this.listEmployees[foundIndex] = employee
+    }
+    
   }
 }
