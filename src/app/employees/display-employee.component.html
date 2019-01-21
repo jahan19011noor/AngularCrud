@@ -1,4 +1,4 @@
-<app-accordion [isHidden]="true" [panelTitle]="employee.name" [hasJustViewed]="selectedEmployeeId">
+<app-accordion [isHidden]="true" [panelTitle]="employee.name" [hasJustViewed]="employee.id===selectedEmployeeId">
   <div class="col-xs-10 panelBody">
     <div class="row vertical-align">
       <div class="col-xs-4">

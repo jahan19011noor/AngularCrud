@@ -35,34 +35,6 @@
       "department": "3",
       "isActive": true,
       "photoPath": "assets/images/john.png"
-    },
-    {
-      "id": 4,
-      "name": "new",
-      "gender": "Female",
-      "email": "new@email.com",
-      "phoneNumber": "239840293",
-      "contactPreference": "Phone",
-      "dateOfBirth": "2018-08-07T18:00:00.000Z",
-      "department": "4",
-      "isActive": true,
-      "photoPath": "assets/images/mark.png",
-      "password": "123456",
-      "confirmPassword": "123456"
-    },
-    {
-      "id": 5,
-      "name": "Edit Marry",
-      "gender": "Female",
-      "email": "sdjfsdl@sdlkjfsd.com",
-      "phoneNumber": "23940238904",
-      "contactPreference": "Email",
-      "dateOfBirth": "2018-08-05T18:00:00.000Z",
-      "department": "2",
-      "isActive": true,
-      "photoPath": "assets/images/mary.png",
-      "password": "123456",
-      "confirmPassword": "123456"
     }
   ]
 }

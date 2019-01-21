@@ -27,6 +27,7 @@ export class DisplayEmployeeComponent implements OnInit  {
 
   ngOnInit() {
     this.selectedEmployeeId = +this._activatedRoute.snapshot.paramMap.get('id')
+    console.log(this.selectedEmployeeId)
   }
 
   viewEmployee()
@@ -40,13 +41,14 @@ export class DisplayEmployeeComponent implements OnInit  {
   }
 
   editEmployee( ) {
-    this._router.navigate(['/edit', this.employee.id], {
-
-    })
+    this._router.navigate(['/edit', this.employee.id])
   }
 
   deleteEmployee() {
-    this._employeeService.deleteEmployee(this.employee.id);
+    this._employeeService.deleteEmployee(this.employee.id).subscribe(
+      () => console.log(`Employee with Id = ${this.employee.id} is deleted!`),
+      (err) => console.log(err)
+    );
     this.notifyDelete.emit(this.employee.id);
   }
 }

@@ -11,45 +11,6 @@ import { ResolvedEmployeeList } from './resolved-employeeList.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private listEmployees: Employee[] = [
-    {
-      id: 1,
-      name: 'Mark',
-      gender: 'Male',
-      contactPreference: 'Email',
-      email: 'mark@pragimtech.com',
-      phoneNumber: 2345978640,
-      dateOfBirth: new Date('10/25/1988'),
-      department: '3',
-      isActive: true,
-      photoPath: 'assets/images/mark.png'
-    },
-    {
-      id: 2,
-      name: 'Mary',
-      gender: 'Female',
-      contactPreference: 'Phone',
-      email: '',
-      phoneNumber: 2345978640,
-      dateOfBirth: new Date('11/20/1979'),
-      department: '2',
-      isActive: true,
-      photoPath: 'assets/images/mary.png'
-    },
-    {
-      id: 3,
-      name: 'John',
-      gender: 'Male',
-      contactPreference: 'Phone',
-      email: '',
-      phoneNumber: 2345978640,
-      dateOfBirth: new Date('3/25/1976'),
-      department: '3',
-      isActive: true,
-      photoPath: 'assets/images/john.png'
-    }
-  ]
-  
   baseUrl = 'http://localhost:3000/employees'
   constructor(private _httpClient: HttpClient) { }
 
@@ -109,10 +70,12 @@ export class EmployeeService {
       .pipe(catchError(this.handleError));
   }
 
-  deleteEmployee(id: number) {
-    const i = this.listEmployees.findIndex(e => e.id === id)
-    if (i !== -1) {
-      this.listEmployees.splice(i, 1);
-    }
+  deleteEmployee(id: number): Observable<void> {
+    return this._httpClient.delete<void>(`${this.baseUrl}/${id}`)
+        .pipe(catchError(this.handleError))
+    // const i = this.listEmployees.findIndex(e => e.id === id)
+    // if (i !== -1) {
+    //   this.listEmployees.splice(i, 1);
+    // }
   }
 }
