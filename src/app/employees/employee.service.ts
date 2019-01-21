@@ -49,6 +49,8 @@ export class EmployeeService {
       photoPath: 'assets/images/john.png'
     }
   ]
+  
+  baseUrl = 'http://localhost:3000/employees'
   constructor(private _httpClient: HttpClient) { }
 
   // getEmployees(): Observable<Employee[]> {
@@ -56,7 +58,7 @@ export class EmployeeService {
   // }
 
   getEmployees(): Observable<Employee[]> {
-    return this._httpClient.get<Employee[]>('http://localhost:3000/employees')
+    return this._httpClient.get<Employee[]>(this.baseUrl)
                 .pipe(
                   catchError(this.handleError)
                 )
@@ -76,30 +78,35 @@ export class EmployeeService {
     // return new ErrorObservable('There is a problem with the service. We are notified & working on it. Please try again later.')
   }
 
-  getEmployee(id: number): Employee {
-    return this.listEmployees.find(e => e.id === id)
+  getEmployee(id: number): Observable<Employee> {
+    // return this.listEmployees.find(e => e.id === id)
+    return this._httpClient.get<Employee>(`${this.baseUrl}/${id}`)
+    .pipe(catchError(this.handleError));
   }
 
-  save(employee: Employee): Observable<Employee> {
-    if(employee.id === null)
-    {
+  addEmployee(employee: Employee): Observable<Employee> {
+    
       // const maxId = this.listEmployees.reduce(function(e1, e2) {
       //   return (e1.id > e2.id) ? e1 : e2;
       // }).id;
       // employee.id = maxId + 1
       // this.listEmployees.push(employee);
-      return this._httpClient.post<Employee>('http://localhost:3000/employees', employee, {
+      return this._httpClient.post<Employee>(this.baseUrl, employee, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })
       })
       .pipe(catchError(this.handleError));
-    }
-    else {
-      const foundIndex = this.listEmployees.findIndex(e => e.id === employee.id)
-      this.listEmployees[foundIndex] = employee
-    }
     
+  }
+
+  updateEmployee(employee: Employee): Observable<void> {
+      return this._httpClient.put<void>(`${this.baseUrl}/${employee.id}`, employee, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      })
+      .pipe(catchError(this.handleError));
   }
 
   deleteEmployee(id: number) {
