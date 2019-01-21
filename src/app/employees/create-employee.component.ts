@@ -90,14 +90,19 @@ export class CreateEmployeeComponent implements OnInit {
 
   // saveEmployee(empForm: NgForm): void {
   saveEmployee(): void {
-    const newEmployee: Employee = Object.assign({}, this.employee)
+    // const newEmployee: Employee = Object.assign({}, this.employee)
 
-    this._employeeService.save(newEmployee);
+    this._employeeService.save(this.employee).subscribe(
+      (data: Employee) => {
+        console.log(data)
+        this.createEmployeeForm.reset();
+        this._router.navigate(['list'])
+      },
+      (error: any) => console.log(error)
+    );
 
     //reset will cause the modal data to reset
-    this.createEmployeeForm.reset();
 
-    this._router.navigate(['list'])
   }
 
 }

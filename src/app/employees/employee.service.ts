@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http' 
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http' 
 import { throwError } from 'rxjs';
 import { Employee } from '../models/employee.model'
 import { Observable, of } from 'rxjs';
@@ -80,14 +80,20 @@ export class EmployeeService {
     return this.listEmployees.find(e => e.id === id)
   }
 
-  save(employee: Employee) {
+  save(employee: Employee): Observable<Employee> {
     if(employee.id === null)
     {
-      const maxId = this.listEmployees.reduce(function(e1, e2) {
-        return (e1.id > e2.id) ? e1 : e2;
-      }).id;
-      employee.id = maxId + 1
-      this.listEmployees.push(employee);
+      // const maxId = this.listEmployees.reduce(function(e1, e2) {
+      //   return (e1.id > e2.id) ? e1 : e2;
+      // }).id;
+      // employee.id = maxId + 1
+      // this.listEmployees.push(employee);
+      return this._httpClient.post<Employee>('http://localhost:3000/employees', employee, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      })
+      .pipe(catchError(this.handleError));
     }
     else {
       const foundIndex = this.listEmployees.findIndex(e => e.id === employee.id)
