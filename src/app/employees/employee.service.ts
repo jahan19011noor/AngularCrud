@@ -4,6 +4,7 @@ import { throwError } from 'rxjs';
 import { Employee } from '../models/employee.model'
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators'
+import { ResolvedEmployeeList } from './resolved-employeeList.model';
 // import 'rxjs/add/operators/delay'
 
 @Injectable({
@@ -55,7 +56,7 @@ export class EmployeeService {
   // }
 
   getEmployees(): Observable<Employee[]> {
-    return this._httpClient.get<Employee[]>('http://localhost:3000/employees1')
+    return this._httpClient.get<Employee[]>('http://localhost:3000/employees')
                 .pipe(
                   catchError(this.handleError)
                 )
@@ -70,8 +71,9 @@ export class EmployeeService {
       console.log('Server Side Error: ', errorResponse);
     }
 
-    return throwError(new Error('There is a problem with the service. We are notified & working on it. Please try again later.'))
-    
+    // return throwError(new ResolvedEmployeeList(null, 'There is a problem with the service. We are notified & working on it. Please try again later.'))
+    return throwError('There is a problem with the service. We are notified & working on it. Please try again later.')
+    // return new ErrorObservable('There is a problem with the service. We are notified & working on it. Please try again later.')
   }
 
   getEmployee(id: number): Employee {

@@ -20,3 +20,7 @@
   (notifyDelete)="onDeleteNotification($event)">
   </app-display-employee>
 </div>
+
+<div *ngIf="error">
+  {{error}}
+</div>
