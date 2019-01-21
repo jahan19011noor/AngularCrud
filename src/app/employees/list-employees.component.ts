@@ -41,12 +41,13 @@ export class ListEmployeesComponent implements OnInit {
       // else {
       //   this.filteredEmployees = this.employees;
       // }
-    const resolvedEmployeeList: ResolvedEmployeeList = this._route.snapshot.data['employeeList']
-    if (resolvedEmployeeList.error == null) {
-      this.employees = resolvedEmployeeList.employeeList
+    // const resolvedEmployeeList: ResolvedEmployeeList = this._route.snapshot.data['employeeList']
+    const resolvedData: Employee[] | string = this._route.snapshot.data['employeeList']
+    if (Array.isArray(resolvedData)) {
+      this.employees = resolvedData;
     }
     else {
-      this.error = resolvedEmployeeList.error;
+      this.error = resolvedData;
     }
     if (this._route.snapshot.queryParamMap.has('searchTerm')) {
       this.searchTerm = this._route.snapshot.queryParamMap.get('searchTerm')

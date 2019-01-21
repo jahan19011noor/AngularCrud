@@ -7,16 +7,15 @@ import { map, catchError } from 'rxjs/operators';
 import { ResolvedEmployeeList } from './resolved-employeeList.model';
 
 @Injectable()
-export class EmployeeListResolverService implements Resolve<ResolvedEmployeeList> {
+export class EmployeeListResolverService implements Resolve<Employee[] | string> {
     
     constructor(private _employeeService: EmployeeService){}
     
     resolve(route: ActivatedRouteSnapshot, 
-        state: RouterStateSnapshot) {
+        state: RouterStateSnapshot): Observable<Employee[] | string> {
         return this._employeeService.getEmployees()
                     .pipe(
-                        map((employeeList) => new ResolvedEmployeeList(employeeList)),
-                        catchError((err: any) => of((new ResolvedEmployeeList(null, err))))
+                        catchError((err: string) => of(err))
                     )
     }
 }
